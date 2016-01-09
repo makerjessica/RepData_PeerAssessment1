@@ -20,7 +20,7 @@ library(Hmisc)
 set directory, download file
 ```{r}
 fileURL<-"https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip"
-setwd("~/Documents/coursera/RepoResearch")
+setwd("~/Documents/coursera/RepoResearch/RepoResearch")
 download.file(fileURL, "./project1.zip", method = "curl")
 ```
 
@@ -36,7 +36,7 @@ activity<- read.csv("./activity.csv")
 
 2. Process/transform the data (if necessary) into a format suitable for your analysis
 None needed immediately. All Data transformation (for dates) are detailed in that portion of code.
-
+***
 ## What is mean total number of steps taken per day?
 1. Calculate the total number of steps taken per day
 If you do not understand the difference between a histogram and a barplot, research the difference between them. 
@@ -47,7 +47,7 @@ stepsPerDay <- tapply(activity$steps, activity$date, sum, na.rm=TRUE)
 2. Make a histogram of the total number of steps taken each day
 
 ```{r}
-hist(stepsByDay, xlab = "Steps Per Day", ylab = "Frequency", main = "Distribution of Steps Per Day")
+hist(stepsPerDay, xlab = "Steps Per Day", ylab = "Frequency", main = "Distribution of Steps Per Day")
 ```
 
 3. Calculate and report the mean and median of the total number of steps taken per day
@@ -55,8 +55,10 @@ hist(stepsByDay, xlab = "Steps Per Day", ylab = "Frequency", main = "Distributio
 ```{r}
 mean(stepsPerDay)
 median(stepsPerDay)
+MeanSteps<- mean(stepsPerDay)
+MedianSteps<- median(stepsPerDay)
 ```
-
+***
 ## What is the average daily activity pattern?
 1. Make a time series plot (i.e. 𝚝𝚢𝚙𝚎 = "𝚕") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 ```{r}
@@ -72,7 +74,7 @@ plot(names(stepsPerInt), stepsPerInt, type="l", xlab="Time Interval", ylab=expre
 ##Find highest Step Interval
 MaxSteps<-which.max(stepsPerInt)
 ```
-
+***
 ## Imputing missing values
 1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with 𝙽𝙰s)
 ```{r}
@@ -104,15 +106,15 @@ hist(ImputedStepsPerDay, xlab = "Steps Per Day", ylab = "Frequency", main = "Dis
 ##report mean and median of imputed steps
 ImputedMean<- mean(ImputedStepsPerDay)
 ImputedMedian <- median(ImputedStepsPerDay)
+mean(ImputedStepsPerDay)
+median(ImputedStepsPerDay)
 
 ##graph for differences
-png("plot3.png")
 par(mfrow=c(2,1))
-hist(stepsByDay, xlab = "Steps Per Day", ylab = "Frequency", main = "Distribution of Steps Per Day")
+hist(stepsPerDay, xlab = "Steps Per Day", ylab = "Frequency", main = "Distribution of Steps Per Day")
 hist(ImputedStepsPerDay, xlab = "Steps Per Day", ylab = "Frequency", main = "Distribution of Steps Per Day (Imputed)")
-dev.off()
 ```
-
+***
 ## Are there differences in activity patterns between weekdays and weekends?
 1. Create a new factor variable in the dataset with two levels -- "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
 ```{r}
@@ -132,10 +134,8 @@ stepsPerIntWDay <- tapply(WeekdayData$imputed_steps, WeekdayData$interval, mean,
 stepsPerIntWEnd <- tapply(WeekendData$imputed_steps, WeekendData$interval, mean, na.rm=TRUE)
 
 ##Create Panel Graph for Weekend and Weekday
-png("plot2.png")
 par(mfrow=c(2,1))
 plot(names(stepsPerIntWDay), stepsPerIntWDay, type="l", xlab="Time Interval", ylab=expression("Steps"),main=expression("Weekday"))
 plot(names(stepsPerIntWEnd), stepsPerIntWEnd, type="l", xlab="Time Interval", ylab=expression("Steps"),main=expression("Weekend"))
-dev.off()
 
 ```
