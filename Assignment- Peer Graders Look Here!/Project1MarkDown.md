@@ -127,10 +127,13 @@ MedianSteps<- median(stepsPerDay)
 stepsPerInt <- tapply(activity$steps, activity$interval, mean, na.rm=TRUE)
 
 ##plot in a time line
+```
+
+```r
 plot(names(stepsPerInt), stepsPerInt, type="l", xlab="Time Interval", ylab=expression("Steps"),main=expression("Daily Steps per 5 Minute Interval"))
 ```
 
-![](Project1MarkDown_files/figure-html/unnamed-chunk-8-1.png) 
+![](Project1MarkDown_files/figure-html/unnamed-chunk-9-1.png) 
 
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -175,7 +178,7 @@ ImputedStepsPerDay <- tapply(ActivityImpute$imputed_steps, ActivityImpute$date, 
 hist(ImputedStepsPerDay, xlab = "Steps Per Day", ylab = "Frequency", main = "Distribution of Steps Per Day (Imputed)")
 ```
 
-![](Project1MarkDown_files/figure-html/unnamed-chunk-12-1.png) 
+![](Project1MarkDown_files/figure-html/unnamed-chunk-13-1.png) 
 
 ```r
 ##report mean and median of imputed steps
@@ -203,7 +206,7 @@ hist(stepsPerDay, xlab = "Steps Per Day", ylab = "Frequency", main = "Distributi
 hist(ImputedStepsPerDay, xlab = "Steps Per Day", ylab = "Frequency", main = "Distribution of Steps Per Day (Imputed)")
 ```
 
-![](Project1MarkDown_files/figure-html/unnamed-chunk-12-2.png) 
+![](Project1MarkDown_files/figure-html/unnamed-chunk-13-2.png) 
 ***
 ## Are there differences in activity patterns between weekdays and weekends?
 1. Create a new factor variable in the dataset with two levels -- "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
@@ -231,4 +234,4 @@ plot(names(stepsPerIntWDay), stepsPerIntWDay, type="l", xlab="Time Interval", yl
 plot(names(stepsPerIntWEnd), stepsPerIntWEnd, type="l", xlab="Time Interval", ylab=expression("Steps"),main=expression("Weekend"))
 ```
 
-![](Project1MarkDown_files/figure-html/unnamed-chunk-14-1.png) 
+![](Project1MarkDown_files/figure-html/unnamed-chunk-15-1.png) 
